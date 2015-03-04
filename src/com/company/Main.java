@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @author Kozlova2
  */
-public class ArmstrongNumber {
+public class Main {
 
     /** Check if a number is an Armsrong number.
      * @param args the command line arguments
