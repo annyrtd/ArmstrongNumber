@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,13 +9,12 @@ import java.util.ArrayList;
  */
 
 public class Main {
-    public Main() {
-    }
-    /** Check if a number is an Armstrong number.
-     * @param args the command line arguments
+    /**
+     * Check if a number is an Armstrong number.
+     * @param args the command line arguments.
      */
     public static void main(String[] args) {
-        System.out.print(" Hello! Please, input a number" +
+        System.out.print(" Hello! Please, input a natural number" +
                 " and I'll tell you whether it is an Armstrong number or not.\n");
         Scanner in = new Scanner(System.in);
         try {
@@ -25,17 +25,19 @@ public class Main {
                 System.out.print(k + " is not an Armstrong number!\n");
             }
         } catch (java.util.InputMismatchException e) {
-            System.out.print("Number should be integer.\n");
-            return;
+            System.out.print("This is not an natural number.\n");
         }
     }
 
     /**
      * Function checks if a number is an Armstrong number.
-     * @param n a number that should be checked
+     * @param n a number that should be checked.
      * @return true, if it is an Armstrong number, and false, otherwise.
      */
     public static boolean isArmstrong(int n) {
+        if (n <= 0) {
+            throw new InputMismatchException();
+        }
         ArrayList<Integer> digits = new ArrayList<Integer>();
         divideIntoDigits(n, digits);
         return countDigits(digits) == n;
@@ -47,12 +49,11 @@ public class Main {
      * @param array array of digits of this number.
      */
     public static void divideIntoDigits(int number, ArrayList<Integer> array) {
-        int m = number;
-        for (int i = 0; m > 0; i++) {
-            array.add(m % 10);
-            m /= 10;
+        int temp = number;
+        while (temp > 0) {
+            array.add(temp % 10);
+            temp /= 10;
         }
-        return;
     }
 
     /**
@@ -60,11 +61,11 @@ public class Main {
      * @return sum of all digits raised to the power of digits' amount.
      */
     public static int countDigits(ArrayList<Integer> array) {
-        int m = 0;
-        int length = array.size();
-        for (int i = 0; i < length; i++) {
-            m += Math.pow(array.get(i), length);
+        int returnValue = 0;
+        int pow = array.size();
+        for (Integer anArray : array) {
+            returnValue += Math.pow(anArray, pow);
         }
-        return m;
+        return returnValue;
     }
 }
